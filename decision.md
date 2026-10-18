@@ -1,0 +1,54 @@
+# Architectural Decision Records (ADR) — Gautam Prabhhu Snacks
+
+## ADR 001: Mobile-First Single Page Application Architecture for QR Code Scanning
+
+- **Date:** 2026-10-18
+- **Context/Problem:**
+  Gautam Prabhhu Snacks is an Indian snacks and sweets business in Rohtak, Haryana, India. The website is primarily accessed by retail customers scanning a QR code printed on physical paper carry bags using mobile devices. The physical connection demands near-instant load times (< 1 second) on cellular 4G/5G connections, zero server cold starts, mobile touch ergonomics, direct action triggers (Menu, WhatsApp enquiry, Google Reviews, Instagram), and a luxurious, traditional Indian aesthetic matching their emerald, maroon, and antique gold packaging.
+- **Decision:**
+  We selected **React 19 with Vite 8 and TypeScript**, styled with **Tailwind CSS v4** and customized with dedicated Indian traditional brand design tokens. All business details, category listings, and review configurations are strictly centralized in a typed single source of truth (`src/config/business.ts`).
+- **Reasoning (The 'Why'):**
+  1. **Instant First-Contentful Paint (FCP):** Unlike complex server-rendered frameworks with cold starts or edge timeouts on low mobile data connections, a pre-bundled static Single Page Application (SPA) downloads instantaneously and responds instantly to tab switches and touch gestures.
+  2. **Predictable Offline & CDN Reliability:** A static bundle can be hosted across global edge networks (Vercel, Netlify, Cloudflare Pages, GitHub Pages) with 100% uptime and zero server maintenance cost.
+  3. **Maintainability for the Business:** Storing all business metadata (phone numbers, FSSAI, Instagram, Google reviews, menu items, prices, and availability flags) in one typed configuration file (`business.ts`) empowers non-technical staff or developers to update menu items and prices in seconds without touching markup or logic.
+  4. **Strict Security Posture:** No client-side secrets, zero database connection strings exposed to the browser, safe URL sanitizers for WhatsApp click-to-chat (`https://wa.me/91...`), sanitized external links (`rel="noopener noreferrer"`), and safe fallback handling for unconfigured external services.
+
+---
+
+## ADR 002: Graceful Degradation & Modal Fallback for Google Reviews & Social Destinations
+
+- **Date:** 2026-10-18
+- **Context/Problem:**
+  The business has confirmed its Instagram handle (`@gautamprabhusnacks`), Rohtak city location, and two phone numbers from the packaging sticker (`9518033535`, `9466291055`), but the verified direct Google Review destination link and exact Google Maps pin are currently pending confirmation. Pointing customers to a broken URL or generic blank page degrades trust and hurts customer sentiment.
+- **Decision:**
+  We implemented an active URL validator (`isConfiguredUrl`) in `src/config/business.ts`. When a destination URL is configured with a verified link, the CTA acts as a direct native link with `rel="noopener noreferrer"`. When the link is unconfigured, the button gracefully opens an interactive modal (`ReviewModal.tsx`) that explains direct setup is in progress, offers a 1-tap "Copy Business Name" feature, and links to Google Search/Maps for Rohtak, preventing dead clicks.
+- **Reasoning (The 'Why'):**
+  In retail and food & beverage, user friction leads to abandonment. Providing an active fallback ensures customers never encounter an error or confusing dead end, while making it trivial for the store owner to activate the 1-click review link in the future by updating a single configuration string.
+
+---
+
+## ADR 003: Sticky Mobile Bottom Action Bar Pattern for QR Scan Conversions
+
+- **Date:** 2026-10-18
+- **Context/Problem:**
+  Customers scanning carry bags are holding a phone in one hand while carrying snack boxes or standing in the shop. Reaching for navigation bars at the top of tall mobile screens (viewport height > 800px) causes ergonomic thumb strain and drops engagement.
+- **Decision:**
+  We introduced a persistent bottom quick-action bar for mobile viewports (`sm:hidden fixed bottom-0`), placing the 4 highest-value actions—**Menu, WhatsApp, Call, and Rate Us**—directly within the thumb comfort zone, styled in deep emerald (`#052B20`) with gold accents.
+- **Reasoning (The 'Why'):**
+  Adheres to Fitts's Law and mobile touch ergonomics. Instant thumb access to WhatsApp enquiry and call links dramatically accelerates customer conversions for daily store pickups and bulk party orders.
+
+---
+
+## ADR 004: Visual De-cluttering, Two-Column Mobile Grid, and Zero-Unverified-Claims Policy
+
+- **Date:** 2026-10-18
+- **Context/Problem:**
+  Initial UI iterations included high-frequency decorative background patterns and placeholder badges (e.g. "100% Pure Vegetarian") that risked distracting retail customers or overpromising on unverified claims. Additionally, single-column product cards on mobile caused excessive vertical scrolling.
+- **Decision:**
+  1. Replaced the high-contrast repeating hero pattern with clean warm ivory (`#FFF8E7`), allowing culinary photography and brand typography to breathe.
+  2. Streamlined the product catalogue to a **2-column grid on mobile screens** and a **4-column grid on wide desktop screens**, significantly improving catalog scannability.
+  3. Relocated developer/testing tools (Paper Bag QR Code modal) from the primary customer header to the footer.
+  4. Enforced strict business claim hygiene: purged all unverified heritage, purity, and certification statements, confining copy to verified packaging sticker data (Rohtak location, FSSAI registration number `20825018001015`, Instagram `@gautamprabhusnacks`, WhatsApp `+91 95180 33535`, Phone `+91 94662 91055`).
+  5. Implemented `scroll-mt-24` on all anchor sections to prevent headings from clipping behind the sticky header.
+- **Reasoning (The 'Why'):**
+  Elevates the brand from feeling like a cluttered template to an authentic, understated luxury Indian culinary destination. Protects the business from regulatory or truth-in-advertising concerns while optimizing for retail conversion speed.

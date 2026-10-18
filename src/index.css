@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-emerald-primary: #073D29;
+    --color-emerald-deep: #052B20;
+    --color-maroon-royal: #790F1C;
+    --color-gold-antique: #C99A32;
+    --color-gold-soft: #E5C56A;
+    --color-ivory-warm: #FFF8E7;
+    --color-ivory-light: #FDFBF7;
+    --color-text-primary: #27251F;
+    --color-text-secondary: #71695C;
+    --color-border-subtle: #E8DDBF;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: #FFF8E7;
+    color: #27251F;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  }
+}
+
+/* Custom Indian Heritage Aesthetic Utilities */
+.bg-ivory-warm {
+  background-color: #FFF8E7;
+}
+
+.bg-ivory-light {
+  background-color: #FDFBF7;
+}
+
+.bg-emerald-primary {
+  background-color: #073D29;
+}
+
+.bg-emerald-deep {
+  background-color: #052B20;
+}
+
+.bg-maroon-royal {
+  background-color: #790F1C;
+}
+
+.text-emerald-primary {
+  color: #073D29;
+}
+
+.text-emerald-deep {
+  color: #052B20;
+}
+
+.text-maroon-royal {
+  color: #790F1C;
+}
+
+.text-gold-antique {
+  color: #C99A32;
+}
+
+.text-gold-soft {
+  color: #E5C56A;
+}
+
+.text-dark {
+  color: #27251F;
+}
+
+.text-muted {
+  color: #71695C;
+}
+
+.border-gold-subtle {
+  border-color: #E8DDBF;
+}
+
+.border-gold-antique {
+  border-color: #C99A32;
+}
+
+/* Metallic Gold Gradients */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FBF0B9 0%, #C99A32 50%, #9A701A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #F5DE88 0%, #C99A32 60%, #9A701A 100%);
+}
+
+.emerald-gradient-bg {
+  background: linear-gradient(150deg, #094E34 0%, #073D29 60%, #042419 100%);
+}
+
+.maroon-gradient-bg {
+  background: linear-gradient(150deg, #8F1525 0%, #790F1C 60%, #500812 100%);
+}
+
+/* Indian Traditional Floral Motif Border */
+.ornament-border {
+  border-image: linear-gradient(to right, transparent, #C99A32, transparent) 1;
+}
+
+/* Subtle Card Glow */
+.gold-glow {
+  box-shadow: 0 4px 20px -2px rgba(201, 154, 50, 0.2);
+}
+
+.emerald-glow {
+  box-shadow: 0 10px 25px -4px rgba(7, 61, 41, 0.25);
+}
+
+/* Touch Friendly Sizing */
+.min-touch-target {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Accessibility Focus States */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #C99A32;
+  outline-offset: 2px;
+}
+
+/* Reduced Motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

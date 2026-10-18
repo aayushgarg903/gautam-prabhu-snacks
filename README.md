@@ -1,0 +1,161 @@
+# Gautam Prabhhu Snacks — Official Web Application
+
+A refined, mobile-first web application designed for retail customers scanning a QR code printed on physical paper carry bags. Built for **Gautam Prabhhu Snacks**, an Indian snacks and sweets business in Rohtak, Haryana, India.
+
+---
+
+## 🎨 Brand Identity & Visual Language
+
+The design is a digital extension of the physical circular packaging sticker:
+- **Primary Emerald:** `#073D29` (Brand headers, primary menu actions, visual anchors)
+- **Deep Emerald:** `#052B20` (Footer, micro-bars, accents)
+- **Royal Maroon:** `#790F1C` (Headings, review action, highlights)
+- **Antique Gold:** `#C99A32` / `#E5C56A` (Fine borders, icons, ornamental accents)
+- **Warm Ivory Background:** `#FFF8E7` / `#FDFBF7` (Clean dominant background)
+- **Typography:** *Cormorant Garamond* & *Playfair Display* (Serif Headings), *Plus Jakarta Sans* (Body)
+- **Visual Character:** Traditional, welcoming, established, and recognizably Indian with restrained ornamentation.
+
+---
+
+## ⚡ Tech Stack & Architecture
+
+- **Frontend Core:** [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool:** [Vite 8](https://vitejs.dev/) (Sub-second HMR & instant 81 kB gzipped static bundle)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) with native CSS variables and heritage design tokens
+- **Icons:** [Lucide React](https://lucide.dev/) + bespoke Indian traditional SVG vectors
+- **Single Source of Truth:** `src/config/business.ts` (centralized store metadata, verified contacts, social links, and demo menu catalogue)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+- Node.js `v20+` or `v22+`
+- npm `v10+` or `v11+`
+
+### 2. Installation
+```bash
+# Clone the repository and navigate into the workspace
+git clone <repo-url>
+cd "Gautam Prabhu Snacks"
+
+# Install dependencies
+npm install
+```
+
+### 3. Local Development
+```bash
+# Start local development server with hot-module reloading
+npm run dev
+```
+The site runs locally at: `http://localhost:5173/`
+
+### 4. Running Unit Tests
+```bash
+# Execute TDD security, URL sanitization, and data integrity tests
+npx tsx test-runner.js
+```
+
+### 5. Production Build
+```bash
+# Compile TypeScript and generate minified, edge-ready static assets
+npm run build
+```
+Compiled output is saved in the `/dist` directory.
+
+---
+
+## 📁 Project Structure
+
+```
+d:/Gautam Prabhu Snacks/
+├── public/
+│   ├── favicon.svg               # Emerald & antique gold GP lotus favicon
+│   ├── images/
+│   │   ├── gp-emblem.svg         # High-resolution royal seal vector
+│   │   ├── hero-banner.jpg       # Authentic brass thali sweets & snacks banner
+│   │   ├── sweets-platter.jpg    # Kaju Katli & Indian mithai showcase
+│   │   ├── namkeen-platter.jpg   # Ratlami Sev, Aloo Bhujia & crispy snacks
+│   │   └── snacks-platter.jpg    # Samosas, Kachoris & Chutneys
+├── src/
+│   ├── components/
+│   │   ├── SiteHeader.tsx        # Streamlined header with customer navigation & call link
+│   │   ├── BrandHero.tsx         # Clean warm-ivory hero with "Tradition in Every Bite"
+│   │   ├── PrimaryActions.tsx    # 3 core bag-scan actions (Menu, Reviews, Instagram)
+│   │   ├── BrandStory.tsx        # Concise, authentic "Made for Your Everyday Cravings"
+│   │   ├── MenuSection.tsx       # 2-col mobile & 4-col desktop grid with WhatsApp enquiry
+│   │   ├── ContactSection.tsx    # Rohtak store details, calling line, & WhatsApp link
+│   │   ├── SiteFooter.tsx        # FSSAI compliance notice, navigation, & QR utility
+│   │   ├── ReviewModal.tsx       # Direct Google reviews launcher & guidance fallback
+│   │   ├── QrCodeModal.tsx       # Live QR code tester & bag print guidelines
+│   │   └── Icons.tsx             # Shared SVGs (Instagram, etc.)
+│   ├── config/
+│   │   └── business.ts           # Central business data & link sanitizers
+│   ├── test/
+│   │   └── businessConfig.test.ts# Automated unit tests for URL safety & schema
+│   ├── App.tsx                   # Main layout container & sticky mobile bar
+│   ├── index.css                 # Design tokens, color system, and luxury utilities
+│   └── main.tsx                  # Application entry point
+├── test-runner.js                # Test execution script
+├── decision.md                   # Architectural Decision Records (ADR)
+├── .env.example                  # Environment configuration template
+└── package.json                  # Scripts and dependencies
+```
+
+---
+
+## ⚙️ Business Configuration (`src/config/business.ts`)
+
+To update store information, phone numbers, or menu offerings, edit `src/config/business.ts`:
+
+- **Store Contact Numbers:**
+  - `contacts.whatsappNumber`: WhatsApp enquiry line (`919518033535`)
+  - `contacts.phoneNumber`: Direct calling line (`9466291055`)
+- **Instagram Handle & Profile:**
+  - `social.instagramHandle`: `@gautamprabhusnacks`
+  - `social.instagramUrl`: `https://www.instagram.com/gautamprabhusnacks/`
+- **Google Reviews Link:**
+  - Replace `googleReviewUrl` with your verified Google Business Profile review link (e.g. `https://g.page/r/.../review`). The UI automatically switches from helper modal to direct 1-click review destination.
+- **Google Maps Location:**
+  - Update `location.googleMapsUrl` with your exact shop pin on Google Maps.
+- **FSSAI Registration:**
+  - Haryana Jurisdiction License: `20825018001015` (displayed gracefully in regulatory section).
+- **Adding / Updating Menu Items:**
+  ```typescript
+  {
+    id: "sweet-kaju-katli",
+    name: "Kaju Katli",
+    category: "sweets", // 'sweets' | 'namkeen' | 'snacks'
+    description: "Traditional diamond-cut cashew fudge with silver leaf finish.",
+    packSize: "250g / 500g / 1kg",
+    estimatedPrice: "₹280 / 250g (Ref.)",
+    image: "/images/sweets-platter.jpg",
+    isDemoPlaceholder: true,
+  }
+  ```
+
+---
+
+## 📦 Deployment Instructions
+
+The project produces a 100% static client bundle (`/dist`) that can be deployed to any modern cloud edge provider in 60 seconds:
+
+### Option A: Vercel (Recommended)
+1. Install Vercel CLI: `npm i -g vercel`
+2. Run `vercel` in the project root directory.
+3. Keep default settings (`Framework: Vite`, `Build Command: npm run build`, `Output Directory: dist`).
+4. Instant production URL with free SSL: `https://gautam-prabhu-snacks.vercel.app` (or bind custom domain `gautamprabhusnacks.com`).
+
+### Option B: Netlify
+1. Run `npx netlify deploy --build`
+2. Follow CLI prompts and select `dist` as publish directory.
+
+---
+
+## 🏷️ Paper Carry Bag QR Code Best Practices
+
+When printing the QR code on paper carry bags for the Rohtak store:
+1. **Target URL:** Use your final HTTPS custom domain (e.g., `https://gautamprabhusnacks.com`). Never print localhost or expiring preview links.
+2. **Minimum Dimensions:** Print at minimum **25 mm × 25 mm (1.0 × 1.0 inch)** to ensure quick camera focus on all smartphone lenses.
+3. **Quiet Zone:** Ensure at least 4 modules of clear white/light ivory background border around the QR matrix.
+4. **Test Before Print:** Test scan sample kraft bags under dim store lighting and direct sunlight with both Android and iOS devices before authorizing a print run of thousands of bags.
