@@ -40,12 +40,13 @@ export const ContactSection: React.FC = () => {
               </p>
             </div>
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Gautam+Prabhhu+Snacks+Rohtak+Haryana"
+              href={BUSINESS_CONFIG.location.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-semibold text-[#790F1C] hover:text-[#073D29] transition-colors py-1 inline-block"
+              className="text-xs font-semibold text-[#790F1C] hover:text-[#073D29] transition-colors py-1 inline-flex items-center justify-center gap-1 min-touch-target"
+              aria-label="Open Gautam Prabhhu Snacks on Google Maps"
             >
-              Search on Google Maps &rarr;
+              <span>View Location on Google Maps &rarr;</span>
             </a>
           </div>
 

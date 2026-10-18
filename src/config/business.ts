@@ -36,7 +36,7 @@ export interface BusinessConfig {
     state: string;
     country: string;
     displayAddress: string;
-    /** UNCONFIGURED until exact store location link is verified */
+    /** Verified Google Maps store location link */
     googleMapsUrl: string;
     isMapsConfigured: boolean;
   };
@@ -87,9 +87,9 @@ export const BUSINESS_CONFIG: BusinessConfig = {
     state: "Haryana",
     country: "India",
     displayAddress: "Rohtak, Haryana, India",
-    // UNCONFIGURED placeholder — update when direct Google Maps business pin is verified
-    googleMapsUrl: "",
-    isMapsConfigured: false,
+    // Verified Google Maps store location link
+    googleMapsUrl: "https://share.google/oKcd9nWPFFkfrJRAv",
+    isMapsConfigured: true,
   },
 
   contacts: {

@@ -47,7 +47,7 @@ export function runTests() {
     "Item WhatsApp enquiry pre-fills exact product name safely"
   );
 
-  // Test 3: Unconfigured URL Validation
+  // Test 3: URL Validation (Configured Google Maps & Instagram, Unconfigured Google Reviews)
   assert(
     !isConfiguredUrl(""),
     "isConfiguredUrl correctly rejects empty string"
@@ -57,8 +57,12 @@ export function runTests() {
     "isConfiguredUrl correctly flags UNCONFIGURED marker as unconfigured"
   );
   assert(
-    !isConfiguredUrl(BUSINESS_CONFIG.location.googleMapsUrl),
-    "Location Google Maps correctly identified as unconfigured placeholder"
+    !isConfiguredUrl(BUSINESS_CONFIG.social.googleReviewUrl),
+    "Unconfigured Google Review link correctly identified as unconfigured"
+  );
+  assert(
+    isConfiguredUrl(BUSINESS_CONFIG.location.googleMapsUrl),
+    "Location Google Maps URL verified as active configured destination"
   );
   assert(
     isConfiguredUrl(BUSINESS_CONFIG.social.instagramUrl),
