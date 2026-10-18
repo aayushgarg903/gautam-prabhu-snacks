@@ -67,3 +67,24 @@
   4. Updated automated unit tests in `src/test/businessConfig.test.ts` to assert that the Google Maps destination is active.
 - **Reasoning (The 'Why'):**
   Retail customers scanning the bag QR code can now navigate directly to the physical shop with a single tap, while keeping all business metadata centrally managed in `business.ts`.
+
+---
+
+## ADR 006: Transition from Synthetic Imagery to Authentic Physical Product Photography
+
+- **Date:** 2026-10-18
+- **Context/Problem:**
+  Initial prototypes featured AI-generated confectionery and namkeen platters. While visually attractive as placeholders, AI imagery risks misrepresenting real artisanal snack textures, shapes, and garnishes, leading to mismatched customer expectations upon store pickup or delivery. The store owner provided 5 high-resolution authentic photographs of real products: Besan Ladoo, Coconut Ladoo, Square Namak Pare, Layered Karela Mathri, and Crispy Gol Mathri.
+- **Decision:**
+  1. Purged all AI-generated stock imagery (`hero-banner.jpg`, `sweets-platter.jpg`, `namkeen-platter.jpg`, `snacks-platter.jpg`).
+  2. Adopted the 5 authentic product photographs directly in `/public/images/`:
+     - `besan-ladoo.jpg` (Hero primary showcase & meta OpenGraph image)
+     - `coconut-ladoo.jpg` (Brand story sweets showcase & Mithai catalogue)
+     - `gol-mathri.jpg` (Brand story namkeen showcase & Snacks catalogue)
+     - `karela-mathri.jpg` (Snacks catalogue)
+     - `namak-pare.jpg` (Namkeen catalogue)
+  3. Streamlined `BUSINESS_CONFIG.menu` to feature these 5 authentic offerings with truthful daily batch enquiry CTAs while awaiting final retail price confirmation.
+  4. Updated automated unit tests and production build to validate the new asset architecture.
+- **Reasoning (The 'Why'):**
+  In retail confectionery, authentic food photography fosters immediate trust and appetite appeal. Real images communicate genuine craftsmanship and allow customers scanning paper carry bags to see exactly what is on the shelves at Gautam Prabhu Snacks in Rohtak.
+

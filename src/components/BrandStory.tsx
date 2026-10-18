@@ -31,8 +31,8 @@ export const BrandStory: React.FC = () => {
           <div className="lg:col-span-5 grid grid-cols-2 gap-3.5">
             <div className="rounded-xl overflow-hidden border border-[#E8DDBF] shadow-sm">
               <img
-                src="/images/sweets-platter.jpg"
-                alt="Indian sweets assortment"
+                src="/images/coconut-ladoo.jpg"
+                alt="Authentic Coconut Ladoo - Gautam Prabhhu Snacks"
                 className="w-full h-36 sm:h-44 object-cover"
                 loading="lazy"
                 width="300"
@@ -41,8 +41,8 @@ export const BrandStory: React.FC = () => {
             </div>
             <div className="rounded-xl overflow-hidden border border-[#E8DDBF] shadow-sm">
               <img
-                src="/images/namkeen-platter.jpg"
-                alt="Indian crispy namkeen varieties"
+                src="/images/gol-mathri.jpg"
+                alt="Crispy Mathri Snack - Gautam Prabhhu Snacks"
                 className="w-full h-36 sm:h-44 object-cover"
                 loading="lazy"
                 width="300"

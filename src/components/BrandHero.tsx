@@ -61,8 +61,8 @@ export const BrandHero: React.FC = () => {
               
               <div className="relative rounded-2xl overflow-hidden border border-[#C99A32]/50 shadow-lg bg-[#052B20]">
                 <img
-                  src="/images/hero-banner.jpg"
-                  alt="Traditional Indian snacks and sweets presentation"
+                  src="/images/besan-ladoo.jpg"
+                  alt="Traditional Indian sweets - Gautam Prabhhu Snacks"
                   className="w-full h-auto aspect-[4/3] object-cover"
                   width="600"
                   height="450"

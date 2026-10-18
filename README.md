@@ -73,10 +73,11 @@ d:/Gautam Prabhu Snacks/
 │   ├── favicon.svg               # Emerald & antique gold GP lotus favicon
 │   ├── images/
 │   │   ├── gp-emblem.svg         # High-resolution royal seal vector
-│   │   ├── hero-banner.jpg       # Authentic brass thali sweets & snacks banner
-│   │   ├── sweets-platter.jpg    # Kaju Katli & Indian mithai showcase
-│   │   ├── namkeen-platter.jpg   # Ratlami Sev, Aloo Bhujia & crispy snacks
-│   │   └── snacks-platter.jpg    # Samosas, Kachoris & Chutneys
+│   │   ├── besan-ladoo.jpg       # Authentic Besan Ladoo with pistachio garnish
+│   │   ├── coconut-ladoo.jpg     # Authentic Coconut Ladoo in desiccated coconut
+│   │   ├── namak-pare.jpg        # Authentic Square Namak Pare savory crackers
+│   │   ├── karela-mathri.jpg     # Authentic Layered Karela Mathri with kalonji
+│   │   └── gol-mathri.jpg        # Authentic Crispy Gol Mathri with black pepper & ajwain
 ├── src/
 │   ├── components/
 │   │   ├── SiteHeader.tsx        # Streamlined header with customer navigation & call link
@@ -123,14 +124,14 @@ To update store information, phone numbers, or menu offerings, edit `src/config/
 - **Adding / Updating Menu Items:**
   ```typescript
   {
-    id: "sweet-kaju-katli",
-    name: "Kaju Katli",
+    id: "sweet-besan-ladoo",
+    name: "Besan Ladoo",
     category: "sweets", // 'sweets' | 'namkeen' | 'snacks'
-    description: "Traditional diamond-cut cashew fudge with silver leaf finish.",
-    packSize: "250g / 500g / 1kg",
-    estimatedPrice: "₹280 / 250g (Ref.)",
-    image: "/images/sweets-platter.jpg",
-    isDemoPlaceholder: true,
+    description: "Traditional golden roasted gram flour ladoos crafted with pure desi ghee and garnished with pistachios.",
+    packSize: "500g / 1kg",
+    estimatedPrice: "Fresh Daily (Enquire)",
+    image: "/images/besan-ladoo.jpg",
+    isDemoPlaceholder: false,
   }
   ```
 

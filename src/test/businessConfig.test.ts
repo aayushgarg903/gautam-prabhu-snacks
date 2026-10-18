@@ -69,10 +69,10 @@ export function runTests() {
     "Instagram URL correctly identified as valid configured link"
   );
 
-  // Test 4: Menu Structure Integrity
+  // Test 4: Menu Structure Integrity & Category Coverage
   assert(
-    BUSINESS_CONFIG.menu.length >= 10,
-    "Menu contains rich selection of authentic Sweets, Namkeen, and Snacks"
+    BUSINESS_CONFIG.menu.length >= 5,
+    "Menu contains authentic selection of photographed products"
   );
   const invalidItems = BUSINESS_CONFIG.menu.filter(
     (item) => !item.id || !item.name || !item.category || !item.image
@@ -80,6 +80,11 @@ export function runTests() {
   assert(
     invalidItems.length === 0,
     "All menu items possess required structural fields (id, name, category, image)"
+  );
+  const categoriesPresent = new Set(BUSINESS_CONFIG.menu.map(i => i.category));
+  assert(
+    categoriesPresent.has("sweets") && categoriesPresent.has("namkeen") && categoriesPresent.has("snacks"),
+    "Menu items cover all primary categories: sweets, namkeen, and snacks"
   );
 
   // Test 5: Verified Business Data Presence
