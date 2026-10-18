@@ -52,3 +52,18 @@
   5. Implemented `scroll-mt-24` on all anchor sections to prevent headings from clipping behind the sticky header.
 - **Reasoning (The 'Why'):**
   Elevates the brand from feeling like a cluttered template to an authentic, understated luxury Indian culinary destination. Protects the business from regulatory or truth-in-advertising concerns while optimizing for retail conversion speed.
+
+---
+
+## ADR 005: Verified Google Maps Location Integration
+
+- **Date:** 2026-10-18
+- **Context/Problem:**
+  The business provided the verified Google Maps store link: `https://share.google/oKcd9nWPFFkfrJRAv`. The application needed to integrate this link cleanly while preserving the uninvented address policy (displaying `Rohtak, Haryana, India` without fabricating an unconfirmed street number).
+- **Decision:**
+  1. Configured `BUSINESS_CONFIG.location.googleMapsUrl` with the verified link `https://share.google/oKcd9nWPFFkfrJRAv` and set `isMapsConfigured: true`.
+  2. Bound the Location Card action in `ContactSection.tsx` directly to this verified destination with `target="_blank" rel="noopener noreferrer"`.
+  3. Preserved strict display address hygiene (`Rohtak, Haryana, India`).
+  4. Updated automated unit tests in `src/test/businessConfig.test.ts` to assert that the Google Maps destination is active.
+- **Reasoning (The 'Why'):**
+  Retail customers scanning the bag QR code can now navigate directly to the physical shop with a single tap, while keeping all business metadata centrally managed in `business.ts`.

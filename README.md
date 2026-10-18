@@ -117,7 +117,7 @@ To update store information, phone numbers, or menu offerings, edit `src/config/
 - **Google Reviews Link:**
   - Replace `googleReviewUrl` with your verified Google Business Profile review link (e.g. `https://g.page/r/.../review`). The UI automatically switches from helper modal to direct 1-click review destination.
 - **Google Maps Location:**
-  - Update `location.googleMapsUrl` with your exact shop pin on Google Maps.
+  - Configured with verified store location: `https://share.google/oKcd9nWPFFkfrJRAv`. Location button in Contact section directly navigates customers to the shop.
 - **FSSAI Registration:**
   - Haryana Jurisdiction License: `20825018001015` (displayed gracefully in regulatory section).
 - **Adding / Updating Menu Items:**
