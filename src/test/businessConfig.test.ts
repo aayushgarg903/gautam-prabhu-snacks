@@ -71,15 +71,22 @@ export function runTests() {
 
   // Test 4: Menu Structure Integrity & Category Coverage
   assert(
-    BUSINESS_CONFIG.menu.length >= 5,
-    "Menu contains authentic selection of photographed products"
+    BUSINESS_CONFIG.menu.length === 15,
+    "Menu contains all 15 authentic items from official rate list"
   );
   const invalidItems = BUSINESS_CONFIG.menu.filter(
-    (item) => !item.id || !item.name || !item.category || !item.image
+    (item) => !item.id || !item.name || !item.category || !item.image || !item.estimatedPrice
   );
   assert(
     invalidItems.length === 0,
-    "All menu items possess required structural fields (id, name, category, image)"
+    "All menu items possess required structural fields (id, name, category, image, estimatedPrice)"
+  );
+  const itemsWithoutRupee = BUSINESS_CONFIG.menu.filter(
+    (item) => !item.estimatedPrice.startsWith("₹")
+  );
+  assert(
+    itemsWithoutRupee.length === 0,
+    "All menu items display authentic rate per kg starting with ₹ currency symbol"
   );
   const categoriesPresent = new Set(BUSINESS_CONFIG.menu.map(i => i.category));
   assert(
@@ -89,8 +96,12 @@ export function runTests() {
 
   // Test 5: Verified Business Data Presence
   assert(
-    BUSINESS_CONFIG.contacts.stickerNumbers.length === 2,
-    "Both phone numbers from physical packaging sticker are preserved centrally"
+    BUSINESS_CONFIG.contacts.stickerNumbers.length >= 2,
+    "Verified phone numbers from physical packaging & official rate list are preserved centrally"
+  );
+  assert(
+    BUSINESS_CONFIG.contacts.whatsappNumber === "918168199589",
+    "Official rate list WhatsApp number (8168199589) correctly configured as primary order line"
   );
   assert(
     BUSINESS_CONFIG.regulatory.fssaiNumber === "20825018001015",

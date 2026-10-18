@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, MessageCircle, Filter, Info } from 'lucide-react';
+import { Search, MessageCircle, Filter, Sparkles, CheckCircle2 } from 'lucide-react';
 import { BUSINESS_CONFIG, buildItemWhatsAppLink } from '../config/business';
 import type { MenuItem } from '../config/business';
 
@@ -8,8 +8,8 @@ export const MenuSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const categories = [
-    { id: 'all', label: 'All Delights', count: BUSINESS_CONFIG.menu.length },
-    { id: 'sweets', label: 'Sweets (Mithai)', count: BUSINESS_CONFIG.menu.filter(m => m.category === 'sweets').length },
+    { id: 'all', label: 'All Items', count: BUSINESS_CONFIG.menu.length },
+    { id: 'sweets', label: 'Sweets & Mithai', count: BUSINESS_CONFIG.menu.filter(m => m.category === 'sweets').length },
     { id: 'namkeen', label: 'Namkeen', count: BUSINESS_CONFIG.menu.filter(m => m.category === 'namkeen').length },
     { id: 'snacks', label: 'Fresh Snacks', count: BUSINESS_CONFIG.menu.filter(m => m.category === 'snacks').length },
   ];
@@ -30,26 +30,26 @@ export const MenuSection: React.FC = () => {
         {/* Section Heading & Subtitle */}
         <div className="text-center max-w-2xl mx-auto mb-6 space-y-2.5">
           <p className="text-xs uppercase font-bold tracking-widest text-[#790F1C]">
-            Illustrative Catalogue Preview
+            Official Rate List • {BUSINESS_CONFIG.rateList.effectiveDate}
           </p>
           <h2 className="font-serif text-2xl sm:text-4xl font-bold text-[#073D29] tracking-tight">
-            Our Menu Selection
+            Our Menu & Rates
           </h2>
           <div className="w-16 h-0.5 bg-[#C99A32] mx-auto"></div>
           <p className="text-xs sm:text-sm text-[#71695C]">
-            Browse our sample varieties of Indian sweets, crispy namkeen, and freshly prepared savory snacks.
+            Authentic traditional sweets, crunchy namkeen, and artisanal mathri. All rates listed per kilogram (₹/kg).
           </p>
         </div>
 
-        {/* Prominent Demo Disclaimer Banner */}
+        {/* Official Rate Notice Banner */}
         <div className="mb-8 p-3.5 bg-[#FFF8E7] rounded-xl border border-[#C99A32]/60 text-xs text-[#71695C] flex items-start gap-2.5 max-w-2xl mx-auto shadow-2xs">
-          <Info className="w-4 h-4 text-[#790F1C] mt-0.5 flex-shrink-0" />
+          <CheckCircle2 className="w-4 h-4 text-[#073D29] mt-0.5 flex-shrink-0" />
           <div className="space-y-0.5">
-            <p className="font-bold text-[#790F1C]">
-              Notice: Illustrative Reference Catalogue
+            <p className="font-bold text-[#073D29]">
+              Prepared Fresh Daily in Rohtak, Haryana
             </p>
             <p className="leading-relaxed">
-              Items and reference prices shown below are sample placeholders to demonstrate the digital menu layout. Daily batch availability, confirmed pack weights, and current prices must be verified directly via WhatsApp.
+              Official rates per kilogram as per our store rate card. Custom box packaging (250g, 500g, 1kg gift boxes) and fresh store pickups can be ordered directly via WhatsApp.
             </p>
           </div>
         </div>
@@ -86,7 +86,7 @@ export const MenuSection: React.FC = () => {
             <div className="relative w-full sm:w-64">
               <input
                 type="text"
-                placeholder="Search items..."
+                placeholder="Search menu..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-[#FFF8E7] border border-[#E8DDBF] rounded-xl pl-8 pr-4 py-1.5 text-xs sm:text-sm text-[#27251F] placeholder-[#71695C]/60 focus:outline-none focus:ring-1 focus:ring-[#073D29]"
@@ -139,14 +139,15 @@ export const MenuSection: React.FC = () => {
                   />
                   
                   {/* Category Tag */}
-                  <span className="absolute top-2 left-2 bg-[#052B20]/80 text-[#E5C56A] text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border border-[#C99A32]/30">
+                  <span className="absolute top-2 left-2 bg-[#052B20]/85 text-[#E5C56A] text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border border-[#C99A32]/30">
                     {item.category}
                   </span>
 
-                  {/* Sample Badge */}
-                  {item.isDemoPlaceholder && (
-                    <span className="absolute top-2 right-2 bg-[#790F1C]/90 text-[#FFF8E7] text-[8px] sm:text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded border border-[#E5C56A]/30">
-                      Sample
+                  {/* Special Highlight Badge (e.g. Made with Desi Ghee, Sugar Free) */}
+                  {item.highlightBadge && (
+                    <span className="absolute top-2 right-2 bg-[#790F1C]/95 text-[#FFF8E7] text-[8px] sm:text-[9px] font-bold tracking-wide px-1.5 py-0.5 rounded shadow-xs border border-[#E5C56A]/50 flex items-center gap-1">
+                      <Sparkles className="w-2.5 h-2.5 text-[#E5C56A]" />
+                      <span className="truncate max-w-[120px]">{item.highlightBadge}</span>
                     </span>
                   )}
                 </div>
@@ -157,29 +158,29 @@ export const MenuSection: React.FC = () => {
                     <h3 className="font-serif text-sm sm:text-base font-bold text-[#073D29] group-hover:text-[#790F1C] transition-colors leading-snug">
                       {item.name}
                     </h3>
-                    <p className="text-[11px] sm:text-xs text-[#71695C] mt-1 leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-[#71695C] mt-1 leading-relaxed line-clamp-2">
                       {item.description}
                     </p>
                   </div>
 
-                  {/* Sizing & Reference Pricing */}
-                  <div className="pt-2 border-t border-[#E8DDBF]/60 flex items-center justify-between text-[11px] sm:text-xs text-[#71695C]">
-                    <span className="truncate max-w-[55%] text-[10px] sm:text-[11px]">{item.packSize}</span>
-                    <span className="font-serif font-bold text-[#790F1C] text-[11px] sm:text-xs">
+                  {/* Sizing & Rate Pricing */}
+                  <div className="pt-2 border-t border-[#E8DDBF]/60 flex items-center justify-between text-[11px] sm:text-xs">
+                    <span className="text-[#71695C] text-[10px] sm:text-[11px] font-medium">Rate / kg</span>
+                    <span className="font-serif font-bold text-[#790F1C] text-xs sm:text-sm">
                       {item.estimatedPrice}
                     </span>
                   </div>
 
                   {/* WhatsApp Enquiry Button */}
                   <a
-                    href={buildItemWhatsAppLink(item.name)}
+                    href={buildItemWhatsAppLink(item.name, item.estimatedPrice)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-1.5 bg-[#073D29] hover:bg-[#052B20] text-[#FFF8E7] text-[11px] sm:text-xs font-semibold py-2 px-2 rounded-lg transition-all active:scale-[0.98] min-touch-target"
-                    aria-label={`Enquire about ${item.name} on WhatsApp`}
+                    aria-label={`Order ${item.name} on WhatsApp`}
                   >
                     <MessageCircle className="w-3.5 h-3.5 fill-current text-[#E5C56A]" />
-                    <span>Enquire on WhatsApp</span>
+                    <span>Order on WhatsApp</span>
                   </a>
                 </div>
               </article>

@@ -110,8 +110,8 @@ d:/Gautam Prabhu Snacks/
 To update store information, phone numbers, or menu offerings, edit `src/config/business.ts`:
 
 - **Store Contact Numbers:**
-  - `contacts.whatsappNumber`: WhatsApp enquiry line (`919518033535`)
-  - `contacts.phoneNumber`: Direct calling line (`9466291055`)
+  - `contacts.whatsappNumber`: WhatsApp Order line from official Rate List (`918168199589` / `+91 81681 99589`)
+  - `contacts.phoneNumber`: Direct store calling line (`9466291055` / `+91 94662 91055`)
 - **Instagram Handle & Profile:**
   - `social.instagramHandle`: `@gautamprabhusnacks`
   - `social.instagramUrl`: `https://www.instagram.com/gautamprabhusnacks/`
@@ -119,17 +119,21 @@ To update store information, phone numbers, or menu offerings, edit `src/config/
   - Replace `googleReviewUrl` with your verified Google Business Profile review link (e.g. `https://g.page/r/.../review`). The UI automatically switches from helper modal to direct 1-click review destination.
 - **Google Maps Location:**
   - Configured with verified store location: `https://share.google/oKcd9nWPFFkfrJRAv`. Location button in Contact section directly navigates customers to the shop.
+- **Official Rate List:**
+  - Effective Date: `w.e.f. Sept. 15, 2026`
+  - 15 Authentic Items: Namkeen & Snacks (1-8) and Sweets & Mithai (9-15) priced per kilogram.
 - **FSSAI Registration:**
   - Haryana Jurisdiction License: `20825018001015` (displayed gracefully in regulatory section).
 - **Adding / Updating Menu Items:**
   ```typescript
   {
-    id: "sweet-besan-ladoo",
-    name: "Besan Ladoo",
+    id: "sweet-besan-laddu-dry-fruits",
+    name: "Besan Laddu with Dry Fruits",
     category: "sweets", // 'sweets' | 'namkeen' | 'snacks'
-    description: "Traditional golden roasted gram flour ladoos crafted with pure desi ghee and garnished with pistachios.",
-    packSize: "500g / 1kg",
-    estimatedPrice: "Fresh Daily (Enquire)",
+    description: "Golden roasted gram flour laddus slow-cooked in pure desi ghee and loaded with sliced pistachios and almonds.",
+    packSize: "Per kg / Gift box",
+    estimatedPrice: "₹640 / kg",
+    highlightBadge: "Made with Desi Ghee",
     image: "/images/besan-ladoo.jpg",
     isDemoPlaceholder: false,
   }

@@ -88,3 +88,20 @@
 - **Reasoning (The 'Why'):**
   In retail confectionery, authentic food photography fosters immediate trust and appetite appeal. Real images communicate genuine craftsmanship and allow customers scanning paper carry bags to see exactly what is on the shelves at Gautam Prabhu Snacks in Rohtak.
 
+---
+
+## ADR 007: Official Physical Rate List & Dynamic WhatsApp Order Integration
+
+- **Date:** 2026-10-18
+- **Context/Problem:**
+  The business provided its official printed Rate List card (`w.e.f. Sept. 15, 2026`), containing 15 authentic offerings across Namkeen & Snacks and Sweets & Mithai with verified rates per kilogram (₹/kg) and key promotional claims ("Made with Desi Ghee", "Without Sugar • Without Honey • Premium Quality"). Additionally, the card confirmed the dedicated WhatsApp order line `8168199589` alongside calling phone `9466291055`.
+- **Decision:**
+  1. Configured all 15 authentic items in `BUSINESS_CONFIG.menu` with their confirmed per-kg pricing, descriptions, and custom highlight badges (`highlightBadge`).
+  2. Promoted the catalogue notice in `MenuSection.tsx` from an "illustrative preview" to a verified official store rate card notice (`w.e.f. Sept. 15, 2026`).
+  3. Integrated dedicated WhatsApp order line `8168199589` as primary WhatsApp order destination, while retaining `9466291055` and `9518033535` as verified business phone records.
+  4. Enhanced `buildItemWhatsAppLink()` to automatically inject product name and exact per-kg rate into the customer's WhatsApp chat pre-fill, minimizing friction for retail conversions.
+  5. Expanded automated TDD unit tests to 16 assertions, validating full 15-item schema, currency formatting, category distribution, and contact consistency.
+- **Reasoning (The 'Why'):**
+  Retail customers scanning paper carry bags want immediate, transparent price information and frictionless 1-tap ordering. Surfacing verified per-kg rates with exact WhatsApp pre-fills eliminates back-and-forth price inquiries, increasing store pickup and gift box conversions.
+
+

@@ -17,9 +17,10 @@ export interface MenuItem {
   category: 'sweets' | 'namkeen' | 'snacks';
   description: string;
   packSize?: string;
-  estimatedPrice?: string; // Clearly marked as reference placeholder
+  estimatedPrice: string; // Rate per kg from official rate list
   image: string;
   isDemoPlaceholder?: boolean;
+  highlightBadge?: string;
 }
 
 export interface BusinessConfig {
@@ -41,19 +42,24 @@ export interface BusinessConfig {
     isMapsConfigured: boolean;
   };
   contacts: {
-    /** Primary WhatsApp number confirmed from business packaging */
+    /** Primary WhatsApp order number from official rate list */
     whatsappNumber: string;
     whatsappFormatted: string;
     whatsappDefaultMessage: string;
     /** Primary calling phone number */
     phoneNumber: string;
     phoneFormatted: string;
-    /** Both numbers as printed on packaging sticker */
+    /** Verified numbers from physical packaging & official rate list */
     stickerNumbers: {
       number: string;
       formatted: string;
       label: string;
     }[];
+  };
+  rateList: {
+    effectiveDate: string;
+    unit: string;
+    notice: string;
   };
   social: {
     instagramHandle: string;
@@ -93,27 +99,38 @@ export const BUSINESS_CONFIG: BusinessConfig = {
   },
 
   contacts: {
-    // Verified from packaging sticker
-    whatsappNumber: "919518033535",
-    whatsappFormatted: "+91 95180 33535",
+    // Verified from official Rate List card & packaging
+    whatsappNumber: "918168199589",
+    whatsappFormatted: "+91 81681 99589",
     whatsappDefaultMessage:
-      "Hello Gautam Prabhhu Snacks, I scanned the QR code on your carry bag and would like to enquire about your menu.",
+      "Hello Gautam Prabhhu Snacks, I would like to enquire about your menu and place an order.",
 
     phoneNumber: "9466291055",
     phoneFormatted: "+91 94662 91055",
 
     stickerNumbers: [
       {
-        number: "9518033535",
-        formatted: "+91 95180 33535",
-        label: "WhatsApp / Enquiry",
+        number: "8168199589",
+        formatted: "+91 81681 99589",
+        label: "WhatsApp Order Line",
       },
       {
         number: "9466291055",
         formatted: "+91 94662 91055",
         label: "Calling Phone",
       },
+      {
+        number: "9518033535",
+        formatted: "+91 95180 33535",
+        label: "Secondary Order Line",
+      },
     ],
+  },
+
+  rateList: {
+    effectiveDate: "w.e.f. Sept. 15, 2026",
+    unit: "₹/kg",
+    notice: "Official Rate List • w.e.f. Sept 15, 2026 • Rates per kg",
   },
 
   social: {
@@ -129,61 +146,162 @@ export const BUSINESS_CONFIG: BusinessConfig = {
     fssaiDisplayNotice: "FSSAI Reg. No. 20825018001015",
   },
 
-  // Structured menu items — authentic products photographed directly from Gautam Prabhu Snacks
+  // Official Menu — 15 Items directly from Gautam Prabhu Snacks Rate List (w.e.f. Sept 15, 2026)
   menu: [
-    // --- SWEETS (MITHAI) ---
+    // --- NAMKEEN & SNACKS (ITEMS 1 to 8) ---
     {
-      id: "sweet-besan-ladoo",
-      name: "Besan Ladoo",
-      category: "sweets",
-      description: "Traditional golden roasted gram flour ladoos crafted with pure desi ghee and garnished with pistachios.",
-      packSize: "500g / 1kg",
-      estimatedPrice: "Fresh Daily (Enquire)",
-      image: "/images/besan-ladoo.jpg",
-      isDemoPlaceholder: false,
-    },
-    {
-      id: "sweet-coconut-ladoo",
-      name: "Coconut Ladoo",
-      category: "sweets",
-      description: "Delicate and juicy coconut mithai rolled generously in fine desiccated coconut flakes.",
-      packSize: "500g / 1kg",
-      estimatedPrice: "Fresh Daily (Enquire)",
-      image: "/images/coconut-ladoo.jpg",
-      isDemoPlaceholder: false,
-    },
-
-    // --- NAMKEEN ---
-    {
-      id: "namkeen-namak-pare",
-      name: "Square Namak Pare",
-      category: "namkeen",
-      description: "Crispy, diamond-square savory bites seasoned with roasted cumin and subtle aromatic spices.",
-      packSize: "250g / 500g",
-      estimatedPrice: "Fresh Batch (Enquire)",
-      image: "/images/namak-pare.jpg",
-      isDemoPlaceholder: false,
-    },
-
-    // --- SNACKS (MATHRI & SAVORIES) ---
-    {
-      id: "snack-karela-mathri",
-      name: "Layered Karela Mathri",
+      id: "snack-kachori",
+      name: "Kachori",
       category: "snacks",
-      description: "Artisanal multi-layered spiral mathri crisped to golden perfection with kalonji and whole spices.",
-      packSize: "250g / 500g",
-      estimatedPrice: "Fresh Batch (Enquire)",
+      description: "Crispy, golden-crusted savory kachoris stuffed with traditional spiced lentil filling.",
+      packSize: "Per kg / Custom pack",
+      estimatedPrice: "₹400 / kg",
       image: "/images/karela-mathri.jpg",
       isDemoPlaceholder: false,
     },
     {
-      id: "snack-gol-mathri",
-      name: "Crispy Gol Mathri",
+      id: "namkeen-signature",
+      name: "Namkeen",
+      category: "namkeen",
+      description: "Classic crunchy signature savory namkeen mix prepared with premium aromatic spices.",
+      packSize: "Per kg / Custom pack",
+      estimatedPrice: "₹400 / kg",
+      image: "/images/namak-pare.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "snack-masala-mathri",
+      name: "Masala Mathri",
       category: "snacks",
-      description: "Flaky, textured round crackers infused with freshly cracked black pepper and fragrant ajwain.",
-      packSize: "250g / 500g",
-      estimatedPrice: "Fresh Batch (Enquire)",
+      description: "Crispy, flaky savory mathri disks seasoned with crushed black pepper and fragrant ajwain.",
+      packSize: "Per kg / Custom pack",
+      estimatedPrice: "₹400 / kg",
       image: "/images/gol-mathri.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "namkeen-plain-papdi",
+      name: "Plain Papdi",
+      category: "namkeen",
+      description: "Delicate, wafer-crisp round golden papdis lightly seasoned for everyday tea time.",
+      packSize: "Per kg / Custom pack",
+      estimatedPrice: "₹360 / kg",
+      image: "/images/gol-mathri.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "snack-methi-papdi-mathri",
+      name: "Methi Papdi Mathri",
+      category: "snacks",
+      description: "Crisp layered mathri delicately infused with hand-rubbed aromatic kasuri methi.",
+      packSize: "Per kg / Custom pack",
+      estimatedPrice: "₹400 / kg",
+      image: "/images/gol-mathri.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "namkeen-mitthe-shakarpare",
+      name: "Mitthe Shakarpare",
+      category: "namkeen",
+      description: "Traditional sweet crispy diamond bites coated with a delicate golden sugar crust.",
+      packSize: "Per kg / Custom pack",
+      estimatedPrice: "₹400 / kg",
+      image: "/images/namak-pare.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "namkeen-masala-shakarpare",
+      name: "Namkeen & Masala Shakarpare",
+      category: "namkeen",
+      description: "Crispy savory square-cut bites seasoned with roasted cumin, carom seeds, and subtle spices.",
+      packSize: "Per kg / Custom pack",
+      estimatedPrice: "₹360 / kg",
+      image: "/images/namak-pare.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "snack-achari-mathri",
+      name: "Achari Mathri",
+      category: "snacks",
+      description: "Multi-layered artisanal spiral mathri seasoned with tangy pickling spices and aromatic kalonji.",
+      packSize: "Per kg / Custom pack",
+      estimatedPrice: "₹400 / kg",
+      image: "/images/karela-mathri.jpg",
+      isDemoPlaceholder: false,
+    },
+
+    // --- SWEETS & MITHAI (ITEMS 9 to 15) ---
+    {
+      id: "sweet-mawa-modak",
+      name: "Mawa Modak",
+      category: "sweets",
+      description: "Melt-in-the-mouth festive modaks handcrafted with slow-cooked reduced mawa and cardamom.",
+      packSize: "Per kg / Gift box",
+      estimatedPrice: "₹640 / kg",
+      image: "/images/coconut-ladoo.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "sweet-coconut-modak",
+      name: "Coconut Modak",
+      category: "sweets",
+      description: "Rich, tender modaks crafted from juicy coconut and sweet condensed milk solids.",
+      packSize: "Per kg / Gift box",
+      estimatedPrice: "₹640 / kg",
+      image: "/images/coconut-ladoo.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "sweet-coconut-laddu",
+      name: "Coconut Laddu",
+      category: "sweets",
+      description: "Soft, luscious coconut laddus rolled generously in freshly grated desiccated coconut flakes.",
+      packSize: "Per kg / Gift box",
+      estimatedPrice: "₹640 / kg",
+      image: "/images/coconut-ladoo.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "sweet-chocolate-modak",
+      name: "Chocolate Modak",
+      category: "sweets",
+      description: "Contemporary confectionery delight blending fine cocoa with traditional rich mawa.",
+      packSize: "Per kg / Gift box",
+      estimatedPrice: "₹550 / kg",
+      image: "/images/besan-ladoo.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "sweet-besan-laddu-dry-fruits",
+      name: "Besan Laddu with Dry Fruits",
+      category: "sweets",
+      description: "Golden roasted gram flour laddus slow-cooked in pure desi ghee and loaded with sliced pistachios and almonds.",
+      packSize: "Per kg / Gift box",
+      estimatedPrice: "₹640 / kg",
+      highlightBadge: "Made with Desi Ghee",
+      image: "/images/besan-ladoo.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "sweet-dry-fruit-laddu",
+      name: "Dry Fruit Laddu",
+      category: "sweets",
+      description: "Exquisite guilt-free luxury laddus made without sugar and without honey, loaded with premium cashews, almonds, and pistachios.",
+      packSize: "Per kg / Gift box",
+      estimatedPrice: "₹1,400 / kg",
+      highlightBadge: "Without Sugar • Without Honey",
+      image: "/images/besan-ladoo.jpg",
+      isDemoPlaceholder: false,
+    },
+    {
+      id: "sweet-chana-laddu",
+      name: "Chana Laddu",
+      category: "sweets",
+      description: "Wholesome, high-protein roasted chana laddus handcrafted with traditional desi ghee and cardamom.",
+      packSize: "Per kg / Gift box",
+      estimatedPrice: "₹1,000 / kg",
+      highlightBadge: "Pure Desi Ghee & High Protein",
+      image: "/images/besan-ladoo.jpg",
       isDemoPlaceholder: false,
     },
   ],
@@ -209,9 +327,14 @@ export function buildWhatsAppLink(
 /**
  * Generates item-specific WhatsApp enquiry message
  */
-export function buildItemWhatsAppLink(itemName: string): string {
-  const customMessage = `Hello Gautam Prabhhu Snacks, I would like to enquire about "${itemName}".`;
-  return buildWhatsAppLink(BUSINESS_CONFIG.contacts.whatsappNumber, customMessage);
+export function buildItemWhatsAppLink(
+  itemName: string,
+  price?: string,
+  phoneNumber = BUSINESS_CONFIG.contacts.whatsappNumber
+): string {
+  const priceSnippet = price ? ` (${price})` : "";
+  const customMessage = `Hello Gautam Prabhhu Snacks, I would like to order / enquire about ${itemName}${priceSnippet}. Please confirm availability and packaging.`;
+  return buildWhatsAppLink(phoneNumber, customMessage);
 }
 
 /**
