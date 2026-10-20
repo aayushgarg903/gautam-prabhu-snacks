@@ -8,6 +8,7 @@
  */
 
 import { BUSINESS_CONFIG, buildWhatsAppLink, buildItemWhatsAppLink, isConfiguredUrl } from '../config/business';
+import { evaluateQrDestination } from '../utils/qrValidation';
 
 export function runTests() {
   const results: { test: string; passed: boolean; error?: string }[] = [];
@@ -57,8 +58,8 @@ export function runTests() {
     "isConfiguredUrl correctly flags UNCONFIGURED marker as unconfigured"
   );
   assert(
-    !isConfiguredUrl(BUSINESS_CONFIG.social.googleReviewUrl),
-    "Unconfigured Google Review link correctly identified as unconfigured"
+    isConfiguredUrl(BUSINESS_CONFIG.social.googleReviewUrl),
+    "Verified Google Review link correctly identified as active configured destination"
   );
   assert(
     isConfiguredUrl(BUSINESS_CONFIG.location.googleMapsUrl),
@@ -108,5 +109,37 @@ export function runTests() {
     "FSSAI registration number correctly configured as 20825018001015"
   );
 
+  // Test 6: QR Destination Print Safety Validation
+  const localRes = evaluateQrDestination("http://localhost:5173");
+  assert(
+    localRes.isValid && !localRes.isPrintSafe,
+    "QR Destination: localhost correctly flagged as NOT print-safe"
+  );
+
+  const privateIpRes = evaluateQrDestination("http://192.168.1.50:3000");
+  assert(
+    privateIpRes.isValid && !privateIpRes.isPrintSafe,
+    "QR Destination: private LAN IP correctly flagged as NOT print-safe"
+  );
+
+  const previewRes = evaluateQrDestination("https://gautam-prabhu-snacks.vercel.app");
+  assert(
+    previewRes.isValid && !previewRes.isPrintSafe,
+    "QR Destination: temporary vercel.app preview host correctly flagged as NOT print-safe"
+  );
+
+  const publicHttpsRes = evaluateQrDestination("https://gautamprabhusnacks.com");
+  assert(
+    publicHttpsRes.isValid && publicHttpsRes.isPrintSafe,
+    "QR Destination: public HTTPS custom domain correctly recognized as print-safe format"
+  );
+
+  const invalidRes = evaluateQrDestination("not-a-valid-url");
+  assert(
+    !invalidRes.isValid && !invalidRes.isPrintSafe,
+    "QR Destination: malformed URL correctly rejected as invalid"
+  );
+
   return results;
 }
+

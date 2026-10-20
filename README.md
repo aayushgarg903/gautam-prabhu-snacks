@@ -53,7 +53,7 @@ The site runs locally at: `http://localhost:5173/`
 ### 4. Running Unit Tests
 ```bash
 # Execute TDD security, URL sanitization, and data integrity tests
-npx tsx test-runner.js
+npm test
 ```
 
 ### 5. Production Build
@@ -71,13 +71,27 @@ Compiled output is saved in the `/dist` directory.
 d:/Gautam Prabhu Snacks/
 ├── public/
 │   ├── favicon.svg               # Emerald & antique gold GP lotus favicon
+│   ├── icons.svg                 # Shared SVG icon sprites
 │   ├── images/
 │   │   ├── gp-emblem.svg         # High-resolution royal seal vector
-│   │   ├── besan-ladoo.jpg       # Authentic Besan Ladoo with pistachio garnish
-│   │   ├── coconut-ladoo.jpg     # Authentic Coconut Ladoo in desiccated coconut
-│   │   ├── namak-pare.jpg        # Authentic Square Namak Pare savory crackers
-│   │   ├── karela-mathri.jpg     # Authentic Layered Karela Mathri with kalonji
-│   │   └── gol-mathri.jpg        # Authentic Crispy Gol Mathri with black pepper & ajwain
+│   │   ├── achari-mathri.jpg     # Achari Mathri
+│   │   ├── besan-laddu.jpg       # Besan Laddu with Dry Fruits
+│   │   ├── besan-ladoo.jpg       # Authentic Besan Ladoo (Hero & OpenGraph)
+│   │   ├── chana-laddu.jpg       # Chana Laddu
+│   │   ├── chocolate-modak.jpg   # Chocolate Modak
+│   │   ├── coconut-laddu.jpg     # Coconut Laddu
+│   │   ├── coconut-ladoo.jpg     # Coconut Ladoo (Brand Story)
+│   │   ├── coconut-modak.jpg     # Coconut Modak
+│   │   ├── dry-fruit-laddu.jpg   # Dry Fruit Laddu (Sugar-free)
+│   │   ├── gol-mathri.jpg        # Gol Mathri (Brand Story)
+│   │   ├── kachori.jpg           # Khasta Kachori
+│   │   ├── masala-mathri.jpg     # Masala Mathri
+│   │   ├── mawa-modak.jpg        # Mawa Modak
+│   │   ├── methi-papdi-mathri.jpg# Methi Papdi Mathri
+│   │   ├── mitthe-shakarpare.jpg # Mitthe Shakarpare
+│   │   ├── namkeen.jpg           # Signature Namkeen
+│   │   ├── namkeen-masala-shakarpare.jpg # Namkeen & Masala Shakarpare
+│   │   └── plain-papdi.jpg       # Plain Papdi
 ├── src/
 │   ├── components/
 │   │   ├── SiteHeader.tsx        # Streamlined header with customer navigation & call link
@@ -94,6 +108,8 @@ d:/Gautam Prabhu Snacks/
 │   │   └── business.ts           # Central business data & link sanitizers
 │   ├── test/
 │   │   └── businessConfig.test.ts# Automated unit tests for URL safety & schema
+│   ├── utils/
+│   │   └── qrValidation.ts       # Destination URL evaluation & bag print-safety guardrails
 │   ├── App.tsx                   # Main layout container & sticky mobile bar
 │   ├── index.css                 # Design tokens, color system, and luxury utilities
 │   └── main.tsx                  # Application entry point
@@ -116,7 +132,7 @@ To update store information, phone numbers, or menu offerings, edit `src/config/
   - `social.instagramHandle`: `@gautamprabhusnacks`
   - `social.instagramUrl`: `https://www.instagram.com/gautamprabhusnacks/`
 - **Google Reviews Link:**
-  - Replace `googleReviewUrl` with your verified Google Business Profile review link (e.g. `https://g.page/r/.../review`). The UI automatically switches from helper modal to direct 1-click review destination.
+  - Configured with verified direct Google Review link: `https://g.page/r/CeLlcyT-82kkEBI/review`. Direct 1-click review action is enabled across all CTAs and footer buttons.
 - **Google Maps Location:**
   - Configured with verified store location: `https://share.google/oKcd9nWPFFkfrJRAv`. Location button in Contact section directly navigates customers to the shop.
 - **Official Rate List:**
@@ -149,7 +165,7 @@ The project produces a 100% static client bundle (`/dist`) that can be deployed 
 1. Install Vercel CLI: `npm i -g vercel`
 2. Run `vercel` in the project root directory.
 3. Keep default settings (`Framework: Vite`, `Build Command: npm run build`, `Output Directory: dist`).
-4. Instant production URL with free SSL: `https://gautam-prabhu-snacks.vercel.app` (or bind custom domain `gautamprabhusnacks.com`).
+4. Instant production URL with free SSL: `https://gautam-prabhu-snacks.vercel.app` (bind your custom domain once purchased and configured, e.g. `gautamprabhusnacks.com`).
 
 ### Option B: Netlify
 1. Run `npx netlify deploy --build`
@@ -160,7 +176,7 @@ The project produces a 100% static client bundle (`/dist`) that can be deployed 
 ## 🏷️ Paper Carry Bag QR Code Best Practices
 
 When printing the QR code on paper carry bags for the Rohtak store:
-1. **Target URL:** Use your final HTTPS custom domain (e.g., `https://gautamprabhusnacks.com`). Never print localhost or expiring preview links.
+1. **Target URL:** Use your confirmed, registered HTTPS custom domain (once purchased and connected in DNS). Never print localhost, private LAN IPs, or temporary preview links (`*.vercel.app`), as QR codes printed on physical bags cannot be changed after production.
 2. **Minimum Dimensions:** Print at minimum **25 mm × 25 mm (1.0 × 1.0 inch)** to ensure quick camera focus on all smartphone lenses.
 3. **Quiet Zone:** Ensure at least 4 modules of clear white/light ivory background border around the QR matrix.
 4. **Test Before Print:** Test scan sample kraft bags under dim store lighting and direct sunlight with both Android and iOS devices before authorizing a print run of thousands of bags.

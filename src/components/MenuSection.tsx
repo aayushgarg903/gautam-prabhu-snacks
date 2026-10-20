@@ -84,13 +84,19 @@ export const MenuSection: React.FC = () => {
 
             {/* Live Search Input */}
             <div className="relative w-full sm:w-64">
+              <label htmlFor="menu-search-input" className="sr-only">
+                Search menu items
+              </label>
               <input
+                id="menu-search-input"
+                name="menuSearchQuery"
                 type="text"
                 placeholder="Search menu..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-[#FFF8E7] border border-[#E8DDBF] rounded-xl pl-8 pr-4 py-1.5 text-xs sm:text-sm text-[#27251F] placeholder-[#71695C]/60 focus:outline-none focus:ring-1 focus:ring-[#073D29]"
                 aria-label="Search menu items"
+                autoComplete="off"
               />
               <Search className="w-3.5 h-3.5 text-[#71695C] absolute left-2.5 top-2.5 pointer-events-none" />
               {searchQuery && (
@@ -136,6 +142,10 @@ export const MenuSection: React.FC = () => {
                     loading="lazy"
                     width="320"
                     height="240"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = '/images/besan-ladoo.jpg';
+                    }}
                   />
                   
                   {/* Category Tag */}

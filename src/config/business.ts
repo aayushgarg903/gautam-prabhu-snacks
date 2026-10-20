@@ -64,7 +64,7 @@ export interface BusinessConfig {
   social: {
     instagramHandle: string;
     instagramUrl: string;
-    /** UNCONFIGURED — Direct Google review writing destination */
+    /** Verified direct Google review writing destination */
     googleReviewUrl: string;
     isGoogleReviewConfigured: boolean;
   };
@@ -136,9 +136,9 @@ export const BUSINESS_CONFIG: BusinessConfig = {
   social: {
     instagramHandle: "@gautamprabhusnacks",
     instagramUrl: "https://www.instagram.com/gautamprabhusnacks/",
-    // UNCONFIGURED: Direct Google Review link to be inserted here when verified
-    googleReviewUrl: "",
-    isGoogleReviewConfigured: false,
+    // Verified direct Google Review link (confirmed by business owner 2026-10-20)
+    googleReviewUrl: "https://g.page/r/CeLlcyT-82kkEBI/review",
+    isGoogleReviewConfigured: true,
   },
 
   regulatory: {
@@ -156,7 +156,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Crispy, golden-crusted savory kachoris stuffed with traditional spiced lentil filling.",
       packSize: "Per kg / Custom pack",
       estimatedPrice: "₹400 / kg",
-      image: "/images/karela-mathri.jpg",
+      image: "/images/kachori.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -166,7 +166,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Classic crunchy signature savory namkeen mix prepared with premium aromatic spices.",
       packSize: "Per kg / Custom pack",
       estimatedPrice: "₹400 / kg",
-      image: "/images/namak-pare.jpg",
+      image: "/images/namkeen.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -176,7 +176,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Crispy, flaky savory mathri disks seasoned with crushed black pepper and fragrant ajwain.",
       packSize: "Per kg / Custom pack",
       estimatedPrice: "₹400 / kg",
-      image: "/images/gol-mathri.jpg",
+      image: "/images/masala-mathri.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -186,7 +186,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Delicate, wafer-crisp round golden papdis lightly seasoned for everyday tea time.",
       packSize: "Per kg / Custom pack",
       estimatedPrice: "₹360 / kg",
-      image: "/images/gol-mathri.jpg",
+      image: "/images/plain-papdi.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -196,7 +196,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Crisp layered mathri delicately infused with hand-rubbed aromatic kasuri methi.",
       packSize: "Per kg / Custom pack",
       estimatedPrice: "₹400 / kg",
-      image: "/images/gol-mathri.jpg",
+      image: "/images/methi-papdi-mathri.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -206,7 +206,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Traditional sweet crispy diamond bites coated with a delicate golden sugar crust.",
       packSize: "Per kg / Custom pack",
       estimatedPrice: "₹400 / kg",
-      image: "/images/namak-pare.jpg",
+      image: "/images/mitthe-shakarpare.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -216,7 +216,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Crispy savory square-cut bites seasoned with roasted cumin, carom seeds, and subtle spices.",
       packSize: "Per kg / Custom pack",
       estimatedPrice: "₹360 / kg",
-      image: "/images/namak-pare.jpg",
+      image: "/images/namkeen-masala-shakarpare.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -226,7 +226,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Multi-layered artisanal spiral mathri seasoned with tangy pickling spices and aromatic kalonji.",
       packSize: "Per kg / Custom pack",
       estimatedPrice: "₹400 / kg",
-      image: "/images/karela-mathri.jpg",
+      image: "/images/achari-mathri.jpg",
       isDemoPlaceholder: false,
     },
 
@@ -238,7 +238,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Melt-in-the-mouth festive modaks handcrafted with slow-cooked reduced mawa and cardamom.",
       packSize: "Per kg / Gift box",
       estimatedPrice: "₹640 / kg",
-      image: "/images/coconut-ladoo.jpg",
+      image: "/images/mawa-modak.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -248,7 +248,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Rich, tender modaks crafted from juicy coconut and sweet condensed milk solids.",
       packSize: "Per kg / Gift box",
       estimatedPrice: "₹640 / kg",
-      image: "/images/coconut-ladoo.jpg",
+      image: "/images/coconut-modak.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -258,7 +258,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Soft, luscious coconut laddus rolled generously in freshly grated desiccated coconut flakes.",
       packSize: "Per kg / Gift box",
       estimatedPrice: "₹640 / kg",
-      image: "/images/coconut-ladoo.jpg",
+      image: "/images/coconut-laddu.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -268,7 +268,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       description: "Contemporary confectionery delight blending fine cocoa with traditional rich mawa.",
       packSize: "Per kg / Gift box",
       estimatedPrice: "₹550 / kg",
-      image: "/images/besan-ladoo.jpg",
+      image: "/images/chocolate-modak.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -279,7 +279,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       packSize: "Per kg / Gift box",
       estimatedPrice: "₹640 / kg",
       highlightBadge: "Made with Desi Ghee",
-      image: "/images/besan-ladoo.jpg",
+      image: "/images/besan-laddu.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -290,7 +290,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       packSize: "Per kg / Gift box",
       estimatedPrice: "₹1,400 / kg",
       highlightBadge: "Without Sugar • Without Honey",
-      image: "/images/besan-ladoo.jpg",
+      image: "/images/dry-fruit-laddu.jpg",
       isDemoPlaceholder: false,
     },
     {
@@ -301,7 +301,7 @@ export const BUSINESS_CONFIG: BusinessConfig = {
       packSize: "Per kg / Gift box",
       estimatedPrice: "₹1,000 / kg",
       highlightBadge: "Pure Desi Ghee & High Protein",
-      image: "/images/besan-ladoo.jpg",
+      image: "/images/chana-laddu.jpg",
       isDemoPlaceholder: false,
     },
   ],

@@ -59,7 +59,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose }) => 
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 w-full bg-[#790F1C] hover:bg-[#5D0A14] text-white font-bold py-3 px-4 rounded-xl shadow transition-colors"
             >
-              <span>Write a 5-Star Review</span>
+              <span>Write a Google Review</span>
               <ExternalLink className="w-4 h-4" />
             </a>
           </div>
@@ -102,7 +102,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose }) => 
             </a>
 
             <p className="text-[11px] text-center text-[#71695C] italic">
-              Config note: Update `googleReviewUrl` in `src/config/business.ts` once direct review shortlink is verified.
+              Your feedback helps us serve you better.
             </p>
           </div>
         )}

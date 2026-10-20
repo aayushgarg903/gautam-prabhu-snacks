@@ -99,7 +99,7 @@ export const PrimaryActions: React.FC<PrimaryActionsProps> = ({ onOpenReviewModa
             className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-emerald-800 hover:text-emerald-950 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300/60 px-3.5 py-1.5 rounded-lg transition-colors"
           >
             <MessageCircle className="w-3.5 h-3.5 fill-current" />
-            <span>Chat on WhatsApp (+91 95180 33535)</span>
+            <span>Chat on WhatsApp ({BUSINESS_CONFIG.contacts.whatsappFormatted})</span>
           </a>
         </div>
 

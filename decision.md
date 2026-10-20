@@ -104,4 +104,42 @@
 - **Reasoning (The 'Why'):**
   Retail customers scanning paper carry bags want immediate, transparent price information and frictionless 1-tap ordering. Surfacing verified per-kg rates with exact WhatsApp pre-fills eliminates back-and-forth price inquiries, increasing store pickup and gift box conversions.
 
+---
+
+## ADR 008: Pre-Launch Audit, Google Review Verification, and Production Distribution Packaging
+
+- **Date:** 2026-10-20
+- **Context/Problem:**
+  A comprehensive technical, UX, and business audit prior to production launch identified several inconsistencies:
+  1. Primary WhatsApp CTA display text was hardcoded to `+91 95180 33535`, while the underlying click-to-chat action routed to `+91 81681 99589` (the official Rate List WhatsApp line).
+  2. The Google Review direct link had not been connected, showing an informational configuration fallback modal to customers.
+  3. Obsolete Vite starter boilerplate assets (`src/App.css`, `src/assets/hero.png`, `src/assets/react.svg`, `src/assets/vite.svg`) remained in the project tree.
+  4. Unit testing lacked an explicit npm script in `package.json`, requiring ad-hoc `npx tsx` invocations.
+  5. The existing project zip archive (`gautam-prabhu-snacks.zip`) was outdated, containing deleted boilerplate files and missing the 15 authentic product photo assets.
+- **Decision:**
+  1. Synchronized WhatsApp UI display to dynamically pull `BUSINESS_CONFIG.contacts.whatsappFormatted` (`+91 81681 99589`), eliminating customer confusion.
+  2. Integrated the verified direct Google Review link (`https://g.page/r/CeLlcyT-82kkEBI/review`), enabling 1-click review submissions directly on Google Business Profile.
+  3. Purged all dead starter assets and CSS files, achieving zero dead weight and zero linter warnings.
+  4. Added `tsx` to devDependencies and wired `"test": "tsx test-runner.js"` into `package.json`.
+  5. Generated a clean, updated production zip archive (`gautam-prabhu-snacks.zip`) containing all current source files, configs, documentation, and product imagery while strictly excluding `node_modules/`, `dist/`, `.git/`, and previous zip files.
+- **Reasoning (The 'Why'):**
+  Ensures absolute parity between UI copy and actual communication channels, unlocks zero-friction social proof collection via Google Reviews, enforces clean repository hygiene, and provides an instantly deployable archive for handoff and cloud edge publishing.
+
+---
+
+## ADR 009: Strict QR Print-Safety Guardrails, Separation of Validation Logic, and Domain Neutrality
+
+- **Date:** 2026-10-20
+- **Context/Problem:**
+  Physical paper carry bags printed with QR codes cannot be modified post-printing. Generating a QR code pointing to `localhost`, internal private LAN IPs, or temporary preview deployment hosts (`*.vercel.app`) risks breaking retail customer journeys permanently once the local dev session or preview deployment expires. Furthermore, `gautamprabhusnacks.com` has not yet been registered or confirmed in DNS, so hardcoding or implying that domain is live in the UI could mislead the store owner into printing unresolvable codes.
+- **Decision:**
+  1. Extracted a dedicated `qrValidation.ts` module with multi-stage destination URL evaluation (detecting loopback addresses, private RFC 1918 IPs, preview subdomains, and protocol requirements).
+  2. Implemented mandatory browser interception (`handleSaveQr`) preventing accidental download of non-print-safe QR codes without explicit user confirmation.
+  3. Purged assumptions regarding domain registration status; ensured the QR generator strictly encodes the exact text displayed in the user interface.
+  4. Updated ReviewModal CTA wording to "Write a Google Review" across all review entrypoints.
+- **Reasoning (The 'Why'):**
+  Protects physical manufacturing capital, guarantees 1-to-1 fidelity between previewed and encoded QR payloads, and prevents customer dead-ends.
+
+
+
 

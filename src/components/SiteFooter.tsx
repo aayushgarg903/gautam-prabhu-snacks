@@ -8,6 +8,8 @@ interface SiteFooterProps {
   onOpenQrModal: () => void;
 }
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export const SiteFooter: React.FC<SiteFooterProps> = ({ onOpenReviewModal, onOpenQrModal }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -132,7 +134,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ onOpenReviewModal, onOpe
         {/* Bottom Copyright & Back to Top */}
         <div className="mt-8 pt-4 border-t border-[#C99A32]/20 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#FFF8E7]/60">
           <p>
-            © {new Date().getFullYear()} {BUSINESS_CONFIG.name}. All Rights Reserved.
+            © {CURRENT_YEAR} {BUSINESS_CONFIG.name}. All Rights Reserved.
           </p>
 
           <button
